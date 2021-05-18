@@ -1,4 +1,4 @@
-const { auth, logger } = require('../services');
+const { auth } = require('../services');
 
 async function authMiddleware(req, res, next) {
   try {
@@ -6,11 +6,8 @@ async function authMiddleware(req, res, next) {
     const userClaims = await auth.verifyAuthToken(bearerToken);
 
     auth.login(req, userClaims);
-
     next();
   } catch (error) {
-    logger.debug(error);
-
     res.status(401).send({
       data: null,
       error: 'Unauthorized',

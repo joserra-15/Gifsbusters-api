@@ -19,6 +19,10 @@ const UserSchema = Schema(
       trim: true,
       unique: true,
     },
+    image: {
+      type: String,
+      default: 'https://media.giphy.com/media/W2j0sdCmHRaqLntCRD/giphy.gif',
+    },
   },
   {
     timestamps: true,

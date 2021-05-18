@@ -36,15 +36,12 @@ async function signUp(req, res, next) {
       data: {
         _id: data._id,
         userName: data.userName,
-        firstName: data.firstName,
-        lastName: data.lastName,
         image: data.image,
-        following: data.following,
-        followedBy: data.followedBy,
       },
       error: null,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 }
