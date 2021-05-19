@@ -8,11 +8,15 @@ const MediaSchema = Schema(
       trim: true,
       required: [true, 'The media url is required'],
     },
+    title: {
+      type: String,
+      trim: true,
+      required: [true, 'The title is required'],
+    },
     type: {
       type: String,
       enum: ['gif', 'meme'],
       required: [true, 'The type is required'],
-      trim: true,
     },
     owner: {
       type: Schema.Types.ObjectId,

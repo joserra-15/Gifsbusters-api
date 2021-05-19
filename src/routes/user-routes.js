@@ -1,14 +1,20 @@
 const Router = require('express').Router;
 
-const { authMiddleware } = require('../middlewares');
+const { authMiddleware, findIdMiddleware } = require('../middlewares');
 const { userController } = require('../controllers');
 
 const userRouter = Router();
 
-userRouter.use(authMiddleware);
+userRouter.post('/sign-up', authMiddleware, userController.signUp);
+userRouter.post('/sign-out', authMiddleware, userController.signOut);
 
-userRouter.post('/sign-up', userController.signUp);
-userRouter.post('/sign-out', userController.signOut);
+userRouter.get('/:userId', userController.getUserById);
+userRouter.patch(
+  '/',
+  authMiddleware,
+  findIdMiddleware,
+  userController.editUser,
+);
 
 module.exports = {
   userRouter: userRouter,

@@ -55,7 +55,58 @@ async function signOut(req, res) {
   });
 }
 
+async function getUserById(req, res, next) {
+  const { userId } = req.params;
+  try {
+    const response = await UserRepo.findById(userId);
+
+    if (response.error) {
+      return res.status(400).send({
+        data: null,
+        error: response.error,
+      });
+    }
+
+    if (response.data) {
+      return res.status(200).send({
+        data: response.data,
+        error: null,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+}
+
+async function editUser(req, res, next) {
+  const { _id } = req.user;
+  const { userName, image } = req.body;
+  try {
+    const response = await UserRepo.editUser({ _id, userName, image });
+
+    if (response.error) {
+      return res.status(400).send({
+        data: null,
+        error: response.error,
+      });
+    }
+
+    if (response.data) {
+      return res.status(200).send({
+        data: response.data,
+        error: null,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+}
+
 module.exports = {
   signUp: signUp,
   signOut: signOut,
+  getUserById: getUserById,
+  editUser: editUser,
 };

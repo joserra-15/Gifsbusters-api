@@ -5,7 +5,11 @@ const { mediaController } = require('../controllers');
 
 const mediaRouter = Router();
 
-mediaRouter.get('/', mediaController.getMedia); // add middlewares validation
+mediaRouter.get('/memes', mediaController.getMemes);
+mediaRouter.get('/gifs', mediaController.getGifs);
+mediaRouter.get('/:mediaId', mediaController.getMediaById);
+mediaRouter.get('/', mediaController.getMedia);
+
 mediaRouter.post(
   '/upload',
   authMiddleware,
