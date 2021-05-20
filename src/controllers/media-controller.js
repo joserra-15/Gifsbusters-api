@@ -26,7 +26,6 @@ async function upload(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -49,7 +48,6 @@ async function getMedia(_, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -73,7 +71,6 @@ async function getMediaById(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -97,7 +94,6 @@ async function getMediaByUserId(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -120,7 +116,6 @@ async function getMemes(_, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -143,7 +138,6 @@ async function getGifs(_, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -167,7 +161,6 @@ async function editMedia(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -175,7 +168,7 @@ async function editMedia(req, res, next) {
 async function deleteMedia(req, res, next) {
   const { _id } = req.user;
   const { mediaId } = req.body;
-  console.log(mediaId);
+
   try {
     const response = await MediaRepo.deleteMedia({ mediaId, _id });
 
@@ -193,7 +186,6 @@ async function deleteMedia(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }

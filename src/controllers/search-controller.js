@@ -19,7 +19,6 @@ async function getMemeSearch(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -43,7 +42,6 @@ async function getGifSearch(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -67,7 +65,6 @@ async function getUserSearch(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }

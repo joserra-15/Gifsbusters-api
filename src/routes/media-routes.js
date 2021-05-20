@@ -36,7 +36,7 @@ mediaRouter.post(
   findIdMiddleware,
   validateCreateMedia,
   mediaController.upload,
-); // add middlewares validation
+);
 
 module.exports = {
   mediaRouter: mediaRouter,

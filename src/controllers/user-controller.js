@@ -41,7 +41,6 @@ async function signUp(req, res, next) {
       error: null,
     });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -74,7 +73,6 @@ async function getUserById(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
@@ -99,7 +97,6 @@ async function editUser(req, res, next) {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 }
