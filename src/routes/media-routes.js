@@ -1,6 +1,11 @@
 const Router = require('express').Router;
 
-const { authMiddleware, findIdMiddleware } = require('../middlewares');
+const {
+  authMiddleware,
+  findIdMiddleware,
+  validateCreateMedia,
+  validateUpdateMedia,
+} = require('../middlewares');
 const { mediaController } = require('../controllers');
 
 const mediaRouter = Router();
@@ -15,6 +20,7 @@ mediaRouter.patch(
   '/',
   authMiddleware,
   findIdMiddleware,
+  validateUpdateMedia,
   mediaController.editMedia,
 );
 mediaRouter.delete(
@@ -28,6 +34,7 @@ mediaRouter.post(
   '/upload',
   authMiddleware,
   findIdMiddleware,
+  validateCreateMedia,
   mediaController.upload,
 ); // add middlewares validation
 

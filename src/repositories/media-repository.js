@@ -3,7 +3,7 @@ const normalizeDBQuery = require('../utils/normalizeDBQuery');
 
 class MediaRepository {
   create(options) {
-    return normalizeDBQuery(db.Media.create(options).lean().exec());
+    return normalizeDBQuery(db.Media.create(options));
   }
 
   findAll() {

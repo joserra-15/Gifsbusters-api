@@ -21,7 +21,8 @@ const UserSchema = Schema(
     },
     image: {
       type: String,
-      default: 'https://media.giphy.com/media/W2j0sdCmHRaqLntCRD/giphy.gif',
+      default:
+        'https://res.cloudinary.com/dwlujoptw/image/upload/v1621507077/giphy_axvhld.gif',
     },
   },
   {
