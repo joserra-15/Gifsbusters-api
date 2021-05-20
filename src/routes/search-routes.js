@@ -4,10 +4,9 @@ const { searchController } = require('../controllers');
 
 const searchRouter = Router();
 
-searchRouter.get('/meme/:searchValues', searchController.getMemeSearch);
-/* searchRouter.get('/gifs', searchController.getGifs);
-searchRouter.get('/:mediaId', searchController.getMediaById);
-searchRouter.get('/', searchController.getMedia); */
+searchRouter.get('/meme/:searchValue', searchController.getMemeSearch);
+searchRouter.get('/gif/:searchValue', searchController.getGifSearch);
+searchRouter.get('/user/:searchValue', searchController.getUserSearch);
 
 module.exports = {
   searchRouter: searchRouter,

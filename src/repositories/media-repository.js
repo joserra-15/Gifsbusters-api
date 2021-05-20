@@ -3,7 +3,7 @@ const normalizeDBQuery = require('../utils/normalizeDBQuery');
 
 class MediaRepository {
   create(options) {
-    return normalizeDBQuery(db.Media.create(options));
+    return normalizeDBQuery(db.Media.create(options).lean().exec());
   }
 
   findAll() {
@@ -19,6 +19,15 @@ class MediaRepository {
     return normalizeDBQuery(
       db.Media.findById({ _id: mediaId, active: true })
         .populate({ path: 'owner', select: 'userName image' })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
+        .lean()
+        .exec(),
+    );
+  }
+
+  findByUserId(userId) {
+    return normalizeDBQuery(
+      db.Media.find({ owner: userId, active: true })
         .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
         .lean()
         .exec(),
@@ -46,6 +55,19 @@ class MediaRepository {
     return normalizeDBQuery(
       db.Media.find({
         type: 'meme',
+        active: true,
+        title: { $regex: value, $options: 'i' },
+      })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
+        .lean()
+        .exec(),
+    );
+  }
+
+  searchGifs(value) {
+    return normalizeDBQuery(
+      db.Media.find({
+        type: 'gif',
         active: true,
         title: { $regex: value, $options: 'i' },
       })

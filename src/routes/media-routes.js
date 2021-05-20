@@ -7,6 +7,7 @@ const mediaRouter = Router();
 
 mediaRouter.get('/memes', mediaController.getMemes);
 mediaRouter.get('/gifs', mediaController.getGifs);
+mediaRouter.get('/user/:userId', mediaController.getMediaByUserId);
 mediaRouter.get('/:mediaId', mediaController.getMediaById);
 mediaRouter.get('/', mediaController.getMedia);
 

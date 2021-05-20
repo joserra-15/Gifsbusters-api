@@ -78,6 +78,30 @@ async function getMediaById(req, res, next) {
   }
 }
 
+async function getMediaByUserId(req, res, next) {
+  const { userId } = req.params;
+  try {
+    const response = await MediaRepo.findByUserId(userId);
+
+    if (response.error) {
+      return res.status(400).send({
+        data: null,
+        error: response.error,
+      });
+    }
+
+    if (response.data) {
+      return res.status(200).send({
+        data: response.data,
+        error: null,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+}
+
 async function getMemes(_, res, next) {
   try {
     const response = await MediaRepo.findMemes();
@@ -182,4 +206,5 @@ module.exports = {
   getGifs: getGifs,
   editMedia: editMedia,
   deleteMedia: deleteMedia,
+  getMediaByUserId: getMediaByUserId,
 };
