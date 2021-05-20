@@ -96,7 +96,7 @@ your contribution, and push the branch as a pull requests.
 
 ## Wiki 📖
 
-- You can also check more info in [Documentation](https://github.com/joserra-15/assembler-tech-challenge-web/tree/main/src/Documentation/Documentation.pdf) on PDF.
+- You can also check more info in [Documentation](https://github.com/joserra-15/assembler-tech-challenge-web/blob/main/Documentation/Documentation.pdf) on PDF.
 
 
 ## Contributors ✨
