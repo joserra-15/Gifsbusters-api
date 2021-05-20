@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const { config } = require('./config');
 const { errorMiddleware } = require('./middlewares');
-const { userRouter, mediaRouter } = require('./routes');
+const { userRouter, mediaRouter, searchRouter } = require('./routes');
 
 const app = express();
 
@@ -21,6 +21,7 @@ app.use(
 
 app.use('/user', userRouter);
 app.use('/media', mediaRouter);
+app.use('/search', searchRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send({

@@ -8,8 +8,8 @@ class MediaRepository {
 
   findAll() {
     return normalizeDBQuery(
-      db.Media.find()
-        .select({ __v: 0, createdAt: 0, updatedAt: 0 })
+      db.Media.find({ active: true })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
         .lean()
         .exec(),
     );
@@ -17,9 +17,9 @@ class MediaRepository {
 
   findById(mediaId) {
     return normalizeDBQuery(
-      db.Media.findById(mediaId)
+      db.Media.findById({ _id: mediaId, active: true })
         .populate({ path: 'owner', select: 'userName image' })
-        .select({ __v: 0, createdAt: 0, updatedAt: 0 })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
         .lean()
         .exec(),
     );
@@ -27,8 +27,8 @@ class MediaRepository {
 
   findMemes() {
     return normalizeDBQuery(
-      db.Media.find({ type: 'meme' })
-        .select({ __v: 0, createdAt: 0, updatedAt: 0 })
+      db.Media.find({ type: 'meme', active: true })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
         .lean()
         .exec(),
     );
@@ -36,8 +36,50 @@ class MediaRepository {
 
   findGifs() {
     return normalizeDBQuery(
-      db.Media.find({ type: 'gif' })
-        .select({ __v: 0, createdAt: 0, updatedAt: 0 })
+      db.Media.find({ type: 'gif', active: true })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
+        .lean()
+        .exec(),
+    );
+  }
+  searchMemes(value) {
+    return normalizeDBQuery(
+      db.Media.find({
+        type: 'meme',
+        active: true,
+        title: { $regex: value, $options: 'i' },
+      })
+        .select({ __v: 0, createdAt: 0, updatedAt: 0, active: 0 })
+        .lean()
+        .exec(),
+    );
+  }
+
+  editMedia({ mediaId, type, title, _id }) {
+    return normalizeDBQuery(
+      db.Media.findOneAndUpdate(
+        { _id: mediaId, owner: _id, active: true },
+        { type: type, title: title },
+        {
+          new: true,
+          select: { __v: 0, createdAt: 0, updatedAt: 0, active: 0 },
+        },
+      )
+        .lean()
+        .exec(),
+    );
+  }
+
+  deleteMedia({ mediaId, _id }) {
+    return normalizeDBQuery(
+      db.Media.findOneAndUpdate(
+        { _id: mediaId, owner: _id, active: true },
+        { active: false },
+        {
+          new: true,
+          select: { __v: 0, createdAt: 0, updatedAt: 0, active: 0 },
+        },
+      )
         .lean()
         .exec(),
     );

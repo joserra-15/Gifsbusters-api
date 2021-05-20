@@ -10,6 +10,19 @@ mediaRouter.get('/gifs', mediaController.getGifs);
 mediaRouter.get('/:mediaId', mediaController.getMediaById);
 mediaRouter.get('/', mediaController.getMedia);
 
+mediaRouter.patch(
+  '/',
+  authMiddleware,
+  findIdMiddleware,
+  mediaController.editMedia,
+);
+mediaRouter.delete(
+  '/',
+  authMiddleware,
+  findIdMiddleware,
+  mediaController.deleteMedia,
+);
+
 mediaRouter.post(
   '/upload',
   authMiddleware,

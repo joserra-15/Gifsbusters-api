@@ -22,6 +22,10 @@ const MediaSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: 'user',
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

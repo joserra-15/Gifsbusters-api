@@ -123,6 +123,56 @@ async function getGifs(_, res, next) {
     next(error);
   }
 }
+async function editMedia(req, res, next) {
+  const { _id } = req.user;
+  const { mediaId, type, title } = req.body;
+  try {
+    const response = await MediaRepo.editMedia({ mediaId, type, title, _id });
+
+    if (response.error) {
+      return res.status(400).send({
+        data: null,
+        error: response.error,
+      });
+    }
+
+    if (response.data) {
+      return res.status(200).send({
+        data: response.data,
+        error: null,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+}
+
+async function deleteMedia(req, res, next) {
+  const { _id } = req.user;
+  const { mediaId } = req.body;
+  console.log(mediaId);
+  try {
+    const response = await MediaRepo.deleteMedia({ mediaId, _id });
+
+    if (response.error) {
+      return res.status(400).send({
+        data: null,
+        error: response.error,
+      });
+    }
+
+    if (response.data) {
+      return res.status(200).send({
+        data: 'OK',
+        error: null,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+}
 
 module.exports = {
   upload: upload,
@@ -130,4 +180,6 @@ module.exports = {
   getMediaById: getMediaById,
   getMemes: getMemes,
   getGifs: getGifs,
+  editMedia: editMedia,
+  deleteMedia: deleteMedia,
 };
